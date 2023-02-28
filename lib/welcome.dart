@@ -2,9 +2,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-
 import 'main.dart';
-
 class Welcome extends StatefulWidget {
   const Welcome({super.key, required this.cameran});
   final cameran;
@@ -46,6 +44,7 @@ class _WelcomeState extends State<Welcome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Welcome to C.O.E.U.S"),
       ),
       body: Center(
@@ -79,9 +78,9 @@ class _WelcomeState extends State<Welcome> {
                   label: const Text('Upload from Galary'), // <-- Text
                 ),
           if (pickedfile != null)
-                // SizedBox(
-                //     width: 400, height: 300, child: Image.file(fileToDisplay!)),
-                SizedBox(height: 40, width: 20),
+            // SizedBox(
+            //     width: 400, height: 300, child: Image.file(fileToDisplay!)),
+            SizedBox(height: 40, width: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

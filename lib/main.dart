@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:coeus/splash_page.dart';
 import 'package:coeus/welcome.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ Future<void> main() async {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: Welcome(cameran: firstCamera,)
+      home: SplashScreen(ca: firstCamera,)
     ),
   );
 }
