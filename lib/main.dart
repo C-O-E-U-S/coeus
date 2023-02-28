@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:coeus/welcome.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -21,14 +22,14 @@ Future<void> main() async {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: TakePictureScreen(
-        // Pass the appropriate camera to the TakePictureScreen widget.
-        camera: firstCamera,
-      ),
+      home: Welcome(cameran: firstCamera,)
     ),
   );
 }
-
+//TakePictureScreen(
+        // Pass the appropriate camera to the TakePictureScreen widget.
+      //  camera: firstCamera,
+      //),
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({
