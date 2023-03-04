@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'package:rive/rive.dart';
 import 'package:camera/camera.dart';
 import 'package:coeus/splash_page.dart';
 import 'package:coeus/welcome.dart';
@@ -19,18 +19,20 @@ Future<void> main() async {
 
   runApp(
     MaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(ca: firstCamera,)
-    ),
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(
+          ca: firstCamera,
+        )),
   );
 }
+
 //TakePictureScreen(
-        // Pass the appropriate camera to the TakePictureScreen widget.
-      //  camera: firstCamera,
-      //),
+// Pass the appropriate camera to the TakePictureScreen widget.
+//  camera: firstCamera,
+//),
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({
