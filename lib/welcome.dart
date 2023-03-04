@@ -77,68 +77,86 @@ class _WelcomeState extends State<Welcome> {
                 // height: 10,
                 ),
           )),
-          Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => TakePictureScreen(
-                          camera: widget.cameran,
-                        )));
-              },
-              icon: const Icon(
-                Icons.camera_alt_rounded,
+          SafeArea(
+            child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => TakePictureScreen(
+                            camera: widget.cameran,
+                          )));
+                },
+                icon: const Icon(
+                  Icons.camera_alt_rounded,
+                ),
+                label: const Text(
+                  'Take a picture from Camera',
+                  // style: TextStyle(
+                  //     fontFamily: "Mukta",
+                  //     height: 1.2,
+                  //     fontStyle: FontStyle.normal,
+                  //     fontWeight: FontWeight.w700),
+                ), // <-- Text
               ),
-              label: const Text('Take a picture from Camera'), // <-- Text
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            isLoading
-                ? CircularProgressIndicator()
-                : ElevatedButton.icon(
-                    onPressed: () {
-                      pickFile();
-                    },
-                    icon: const Icon(
-                      Icons.file_upload,
+              SizedBox(
+                height: 50,
+              ),
+              isLoading
+                  ? CircularProgressIndicator()
+                  : ElevatedButton.icon(
+                      onPressed: () {
+                        pickFile();
+                      },
+                      icon: const Icon(
+                        Icons.file_upload,
+                      ),
+                      label: const Text(
+                        'Upload from Gallary',
+                        // style: TextStyle(
+                        //     fontFamily: "Mukta",
+                        //     height: 1.2,
+                        //     fontStyle: FontStyle.normal,
+                        //     fontWeight: FontWeight.w700),
+                      ), // <-- Text
                     ),
-                    label: const Text('Upload from Gallary'), // <-- Text
-                  ),
-            if (pickedfile != null)
-              // SizedBox(
-              //     width: 400, height: 300, child: Image.file(fileToDisplay!)),
-              SizedBox(height: 40, width: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(children: [
-                  Text(
-                    _fileName?.toString() ?? " ",
-                    style: const TextStyle(
-                        color: Colors.grey, fontSize: 20, fontFamily: 'Roboto'),
-                  ),
-                  _fileName == null
-                      ? const SizedBox(
-                          height: 30,
-                          width: 10,
-                        )
-                      : Column(children: [
-                          const SizedBox(
+              if (pickedfile != null)
+                // SizedBox(
+                //     width: 400, height: 300, child: Image.file(fileToDisplay!)),
+                SizedBox(height: 40, width: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(children: [
+                    Text(
+                      _fileName?.toString() ?? " ",
+                      style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 20,
+                          fontFamily: 'Roboto'),
+                    ),
+                    _fileName == null
+                        ? const SizedBox(
                             height: 30,
                             width: 10,
-                          ),
-                          ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.upload_file_sharp,
+                          )
+                        : Column(children: [
+                            const SizedBox(
+                              height: 30,
+                              width: 10,
                             ),
-                            label: Text('Submit'), // <-- Text
-                          ),
-                        ])
-                ])
-              ],
-            ),
-          ]),
+                            ElevatedButton.icon(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.upload_file_sharp,
+                              ),
+                              label: Text('Submit'), // <-- Text
+                            ),
+                          ])
+                  ])
+                ],
+              ),
+            ]),
+          ),
           SafeArea(
               child: Padding(
             padding: const EdgeInsets.only(left: 32, top: 100),
