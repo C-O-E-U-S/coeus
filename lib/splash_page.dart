@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void startTimer() {
-    Timer(const Duration(seconds: 2), _navigateAfter);
+    Timer(const Duration(seconds: 3), _navigateAfter);
   }
 
   @override

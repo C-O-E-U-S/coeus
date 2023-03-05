@@ -161,7 +161,7 @@ class DisplayPictureScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: const Text(
-        'Is this right?',
+        'Captured Problem',
         style: TextStyle(
             fontFamily: "Mukta",
             height: 1.2,
