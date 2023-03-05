@@ -77,12 +77,15 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   Widget build(BuildContext context) {
     return Center(
       child: Scaffold(
-        appBar: AppBar(title: const Text('Capture the Problem',
-                       style: TextStyle(
-                      fontFamily: "Mukta",
-                      height: 1.2,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w700),)),
+        appBar: AppBar(
+            title: const Text(
+          'Capture the Problem',
+          style: TextStyle(
+              fontFamily: "Mukta",
+              height: 1.2,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w700),
+        )),
         // You must wait until the controller is initialized before displaying the
         // camera preview. Use a FutureBuilder to display a loading spinner until the
         // controller has finished initializing.
@@ -156,18 +159,48 @@ class DisplayPictureScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('What we got of your Problem')),
-      // The image is stored as a file on the device. Use the `Image.file`
-      // constructor with the given path to display the image.
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.network(imagePath),
-          ],
-        ),
-      ),
-    );
+        appBar: AppBar(
+            title: const Text(
+          'Is this right?',
+          style: TextStyle(
+              fontFamily: "Mukta",
+              height: 1.2,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w700),
+        )),
+        // The image is stored as a file on the device. Use the `Image.file`
+        // constructor with the given path to display the image.
+        body: Column(children: [
+          Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(imagePath),
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.upload_file_sharp,
+                  ),
+                  label: const Text(
+                    'Submit',
+                    style: TextStyle(
+                        fontFamily: "Mukta",
+                        height: 1.2,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w700),
+                  ), // <-- Text
+                ),
+              ),
+            ],
+          )
+        ]));
   }
 }

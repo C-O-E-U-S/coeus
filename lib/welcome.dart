@@ -130,16 +130,18 @@ class _WelcomeState extends State<Welcome> {
                     Text(
                       _fileName?.toString() ?? " ",
                       style: const TextStyle(
-                          color: Colors.grey, fontSize: 20, fontFamily: 'Roboto'),
+                          color: Colors.grey,
+                          fontSize: 20,
+                          fontFamily: 'Roboto'),
                     ),
                     _fileName == null
                         ? const SizedBox(
-                            height: 30,
+                            height: 10,
                             width: 10,
                           )
                         : Column(children: [
                             const SizedBox(
-                              height: 30,
+                              height: 10,
                               width: 10,
                             ),
                             ElevatedButton.icon(
