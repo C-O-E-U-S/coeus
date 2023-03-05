@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:coeus/welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key, required this.ca});
@@ -24,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void startTimer() {
-    Timer(const Duration(seconds: 3), _navigateAfter);
+    Timer(const Duration(seconds: 2), _navigateAfter);
   }
 
   @override
@@ -40,30 +41,23 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: <Color>[
-            Colors.deepPurple,
-            Color.fromARGB(255, 215, 166, 219)
-          ])),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
         children: [
-          ScaleTransition(
-            scale: animation,
-            child: Center(
-                //     child: Image.asset(
-                //   "lib/hipi.png",
-                //   width: 250,
-                // )
-                child: Text(
-              "C.0.E.U.S",
-              style: TextStyle(fontSize: 28, color: Colors.white),
-            )),
+          // ScaleTransition(
+          //   scale: animation,
+          //   child:
+          Center(
+            //     child: Image.asset(
+            //   "lib/hipi.png",
+            //   width: 250,
+            // )
+            child: RiveAnimation.asset(
+              'RiveAsset/beauty.riv',
+            ),
           ),
+          // ),
         ],
       ),
     );

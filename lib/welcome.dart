@@ -121,7 +121,7 @@ class _WelcomeState extends State<Welcome> {
             if (pickedfile != null)
               // SizedBox(
               //     width: 400, height: 300, child: Image.file(fileToDisplay!)),
-              SizedBox(height: 40, width: 20),
+              SizedBox(height: 10, width: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
