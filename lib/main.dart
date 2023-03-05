@@ -159,48 +159,45 @@ class DisplayPictureScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: const Text(
-          'Is this right?',
-          style: TextStyle(
-              fontFamily: "Mukta",
-              height: 1.2,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w700),
-        )),
-        // The image is stored as a file on the device. Use the `Image.file`
-        // constructor with the given path to display the image.
-        body: Column(children: [
-          Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.network(imagePath),
-              ],
-            ),
-          ),
-          Column(
+      appBar: AppBar(
+          title: const Text(
+        'Is this right?',
+        style: TextStyle(
+            fontFamily: "Mukta",
+            height: 1.2,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w700),
+      )),
+      // The image is stored as a file on the device. Use the `Image.file`
+      // constructor with the given path to display the image.
+      body: Column(children: [
+        Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.upload_file_sharp,
-                  ),
-                  label: const Text(
-                    'Submit',
-                    style: TextStyle(
-                        fontFamily: "Mukta",
-                        height: 1.2,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w700),
-                  ), // <-- Text
-                ),
-              ),
+              Image.network(imagePath),
             ],
-          )
-        ]));
+          ),
+        ),
+      ]),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomCenter,
+        child: ElevatedButton.icon(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.upload_file_sharp,
+          ),
+          label: const Text(
+            'Submit',
+            style: TextStyle(
+                fontFamily: "Mukta",
+                height: 1.2,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w700),
+          ), // <-- Text
+        ),
+      ),
+    );
   }
 }
