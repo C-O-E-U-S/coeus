@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void startTimer() {
-    Timer(const Duration(seconds: 3), _navigateAfter);
+    Timer(const Duration(seconds: 6), _navigateAfter);
   }
 
   @override
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen>
             //   width: 250,
             // )
             child: RiveAnimation.asset(
-              'RiveAsset/beauty.riv',
+              'RiveAsset/bub.riv',
             ),
           ),
           // ),
