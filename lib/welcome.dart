@@ -110,7 +110,7 @@ class _WelcomeState extends State<Welcome> {
                       Icons.file_upload,
                     ),
                     label: const Text(
-                      'Upload from Gallary',
+                      'Upload from Gallery',
                       style: TextStyle(
                           fontFamily: "Mukta",
                           height: 1.2,
