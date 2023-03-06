@@ -121,7 +121,7 @@ class _WelcomeState extends State<Welcome> {
             if (pickedfile != null)
               // SizedBox(
               //     width: 400, height: 300, child: Image.file(fileToDisplay!)),
-              SizedBox(height: 10, width: 20),
+              SizedBox(height: 40, width: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -141,7 +141,7 @@ class _WelcomeState extends State<Welcome> {
                           )
                         : Column(children: [
                             const SizedBox(
-                              height: 10,
+                              height: 40,
                               width: 10,
                             ),
                             ElevatedButton.icon(
@@ -151,6 +151,9 @@ class _WelcomeState extends State<Welcome> {
                               ),
                               label: Text('Submit'), // <-- Text
                             ),
+                            SizedBox(
+                              height: 50,
+                            )
                           ])
                   ]),
                 )
