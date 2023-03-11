@@ -12,7 +12,7 @@ class Welcome extends StatefulWidget {
   @override
   State<Welcome> createState() => _WelcomeState();
 }
-
+//welcome
 class _WelcomeState extends State<Welcome> {
   double? h = 50;
   late TextEditingController _controller;
