@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:rive/rive.dart';
 import 'package:camera/camera.dart';
 import 'package:coeus/splash_page.dart';
-import 'package:coeus/welcome.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {

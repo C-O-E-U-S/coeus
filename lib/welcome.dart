@@ -14,6 +14,8 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  double? h = 50;
+  late TextEditingController _controller;
   FilePickerResult? result;
   String? _fileName;
   PlatformFile? pickedfile;
@@ -44,8 +46,21 @@ class _WelcomeState extends State<Welcome> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // appBar: AppBar(
       //   automaticallyImplyLeading: false,
       //   title: const Text("Welcome to C.O.E.U.S"),
@@ -78,6 +93,49 @@ class _WelcomeState extends State<Welcome> {
                 ),
           )),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 50, right: 50),
+              child: TextField(
+                onTap: () {
+                  setState(() {
+                    h = 130;
+                  });
+                },
+                controller: _controller,
+                decoration: InputDecoration(
+                    // labelText: 'Type it out',
+                    hintText: 'Type it out'),
+                onSubmitted: (String value) async {
+                  setState(() {
+                    h = 50;
+                  });
+                  if (value != "") {
+                    await showDialog<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Your Prompt'),
+                          content: Text(value),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                _controller.clear();
+                              },
+                              child: const Text('Submit'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                  ;
+                },
+              ),
+            ),
+            SizedBox(
+              height: h,
+            ),
             ElevatedButton.icon(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
