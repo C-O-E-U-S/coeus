@@ -226,7 +226,7 @@ class _WelcomeState extends State<Welcome> {
             child: Column(
               children: [
                 SizedBox(
-                  width: 260,
+                  width: (MediaQuery.of(context).size.width) * 1 / 1.59,
                   child: Column(
                     children: [
                       Text(
