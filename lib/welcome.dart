@@ -94,7 +94,9 @@ class _WelcomeState extends State<Welcome> {
           )),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Padding(
-              padding: EdgeInsets.only(left: 50, right: 50),
+              padding: EdgeInsets.only(
+                  left: (MediaQuery.of(context).size.width) * 1 / 10,
+                  right: (MediaQuery.of(context).size.width) * 1 / 10),
               child: TextField(
                 onTap: () {
                   setState(() {
