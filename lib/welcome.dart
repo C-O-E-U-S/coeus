@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
-import 'package:camera/camera.dart';
+import 'package:coeus/response_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:http/http.dart' as http;
 import 'main.dart';
 
 class Welcome extends StatefulWidget {
@@ -13,7 +15,9 @@ class Welcome extends StatefulWidget {
   State<Welcome> createState() => _WelcomeState();
 }
 
+//welcome
 class _WelcomeState extends State<Welcome> {
+  int? imtxt;
   double? h = 50;
   late TextEditingController _controller;
   FilePickerResult? result;
@@ -43,6 +47,38 @@ class _WelcomeState extends State<Welcome> {
     } catch (e) {
       print(e);
     }
+  }
+
+  late Map<String, String> json;
+  Future<void> fetchdata(String text) async {
+    final response = await http.post(
+      Uri.parse(
+          'http://10.12.48.157:5000/api/generate-answer'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'query': text.toString(),
+      }),
+    );
+    json = jsonDecode(response.body);
+    print(json);
+  }
+
+  late Map<String, String> ijson;
+  Future<void> upload(String filename) async {
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            "https://10.12.48.157:5000/api/image-process"));
+
+    request.files.add(http.MultipartFile(
+        'file',
+        File(_fileName.toString()).readAsBytes().asStream(),
+        File(filename).lengthSync(),
+        filename: "data.jpeg"));
+    var res = await request.send();
+    ijson = jsonDecode(await res.stream.bytesToString());
   }
 
   @override
@@ -120,9 +156,15 @@ class _WelcomeState extends State<Welcome> {
                           content: Text(value),
                           actions: <Widget>[
                             TextButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                await fetchdata(value);
                                 Navigator.pop(context);
                                 _controller.clear();
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        responseScreen(
+                                          text: json['response'].toString(),
+                                        )));
                               },
                               child: const Text('Submit'),
                             ),
@@ -179,7 +221,7 @@ class _WelcomeState extends State<Welcome> {
                     ), // <-- Text
                   ),
             if (pickedfile != null)
-              // SizedBox(
+              // SizedBox
               //     width: 400, height: 300, child: Image.file(fileToDisplay!)),
               SizedBox(height: 40, width: 20),
             Row(
@@ -205,7 +247,14 @@ class _WelcomeState extends State<Welcome> {
                               width: 10,
                             ),
                             ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await upload(_fileName!);
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        responseScreen(
+                                          text: ijson['response'].toString(),
+                                        )));
+                              },
                               icon: const Icon(
                                 Icons.upload_file_sharp,
                               ),
