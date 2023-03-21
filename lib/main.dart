@@ -1,7 +1,14 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:camera/camera.dart';
+import 'package:coeus/response_screen.dart';
+import 'package:http/http.dart' as http;
 import 'package:coeus/splash_page.dart';
 import 'package:flutter/material.dart';
+import 'package:coeus/welcome.dart';
+import 'package:http/http.dart';
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -13,16 +20,16 @@ Future<void> main() async {
 
   // Get a specific camera from the list of available cameras.
   final firstCamera = cameras.last;
-  runApp(
-    MaterialApp(
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: SplashScreen(
-          ca: firstCamera,
-        )),
-  );
+  runApp(MaterialApp(
+    theme: ThemeData(
+      useMaterial3: true,
+    ),
+    debugShowCheckedModeBanner: false,
+    // home: responseScreen(text: 'Hello',),
+    home: SplashScreen(
+      ca: firstCamera,
+    ),
+  ));
 }
 
 //TakePictureScreen(
@@ -128,7 +135,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                       builder: (context) => DisplayPictureScreen(
                         // Pass the automatically generated path to
                         // the DisplayPictureScreen widget.
-                        imagePath: image.path,
+                        image: image,
                       ),
                     ),
                   );
@@ -148,9 +155,28 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
 // A widget that displays the picture taken by the user.
 class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
+  final XFile image;
+  late Map<String, String> ijson;
+  DisplayPictureScreen({super.key, required this.image});
 
-  const DisplayPictureScreen({super.key, required this.imagePath});
+  Future<void> upload() async {
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            "https://10.12.48.157:5000/api/image-process"));
+  
+    request.files.add(http.MultipartFile(
+        'file', image.readAsBytes().asStream(), await image.length(),
+        filename: "data.jpeg"));
+    var res = await request.send();
+    ijson = jsonDecode(await res.stream.bytesToString());
+  }
+
+  // void fetchdata() async {
+  //   final response = await get(Uri.parse("https://backend-production-2203.up.railway.app/api/generate-answer"));
+  //   Map<String, dynamic> json = jsonDecode(response.body);
+  //   print(json);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +198,7 @@ class DisplayPictureScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(imagePath),
+              Image.network(image.path),
             ],
           ),
         ),
@@ -180,7 +206,14 @@ class DisplayPictureScreen extends StatelessWidget {
       floatingActionButton: Align(
         alignment: Alignment.bottomCenter,
         child: ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () async {
+            await upload();
+              Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        responseScreen(
+                                          text: ijson['response'].toString(),
+                                        )));
+          },
           icon: const Icon(
             Icons.upload_file_sharp,
           ),
